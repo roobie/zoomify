@@ -616,8 +616,6 @@
 
     }
 
-    //addEventListener(window, 'load', init); // Not DOM ready, as we need the image to have loaded
-
     return function (cfg) {
       if (!cfg.img) {
         throw new TypeError('img must be a reference to an img');
@@ -630,7 +628,9 @@
         init(cfg);
       };
 
+      // run setup on img load
       addEventListener(cfg.img, 'load', setup);
+      // but if img has loaded, run it directly
       if (cfg.img.complete) {
         setup();
       }
